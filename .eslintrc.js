@@ -24,4 +24,12 @@ module.exports = {
     requireMiniProgram: true,
   },
   rules: {},
+  overrides: [
+    {
+      files: 'scripts/**/*.{js,ts}',
+      rules: {
+        'no-console': 'off',
+      },
+    },
+  ],
 };
