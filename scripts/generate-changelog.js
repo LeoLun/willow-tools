@@ -62,7 +62,6 @@ async function updateChangeLog() {
   const pageDataStr = `${initialChangelogStr.match(/---[\s\S]+---/)[0]}\n`;
   const data = initialChangelogStr.split(/---[\s\S]+---/);
   data.unshift(pageDataStr);
-
   new Promise((resolve) => {
     standardChangelog({}, null, { from: lastCommit, to: 'HEAD' })
       .on('data', (chunk) => {
