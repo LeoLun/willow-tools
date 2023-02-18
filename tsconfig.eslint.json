@@ -4,5 +4,6 @@
     "src",
     "scripts",
     ".eslintrc.js",
+    "commitlint.config.js"
   ]
 }
