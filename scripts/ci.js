@@ -7,14 +7,14 @@ const pkg = require('../package.json');
 const private = process.env.MINIPROGRAM_PRIVATE;
 
 // 将内容写入 private.key
-fs.writeFileSync('./cache/private.key', private);
+fs.writeFileSync('./private.key', private);
 
 const createProject = () => {
   const project = new ci.Project({
     appid: config.appid,
     type: 'miniProgram',
     projectPath: path.resolve(__dirname, '../'),
-    privateKeyPath: path.resolve(__dirname, '../cache/private.key'),
+    privateKeyPath: path.resolve(__dirname, '../private.key'),
     ignores: ['node_modules/**/*'],
   });
   return project;
