@@ -9,6 +9,7 @@ App<IAppOption>({
     // 登录
     wx.login({
       success: (res) => {
+        // eslint-disable-next-line no-console
         console.log(res.code);
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
       },

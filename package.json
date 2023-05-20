@@ -2,15 +2,25 @@
   "name": "willow-tools",
   "version": "1.0.1",
   "scripts": {
-    "lint": "eslint '{src,scripts}/**/*.{js,ts}'",
+    "lint": "pnpm run lint:js && pnpm run lint:css",
+    "lint:js": "eslint '{src,scripts}/**/*.{js,ts}'",
+    "lint:css": "stylelint '**/*.scss'",
     "prepare": "husky install",
-    "release": "node scripts/generate-changelog.js"
+    "changelog": "node scripts/generate-changelog.js",
+    "preview": "cross-env NODE_CI_ENV=preview node scripts/ci.js",
+    "upload": "cross-env NODE_CI_ENV=upload node scripts/ci.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "standard-changelog": "^2.0.27"
+    "@babel/helper-plugin-utils": "^7.20.2",
+    "@babel/helper-string-parser": "^7.19.4",
+    "@babel/helper-validator-identifier": "^7.19.1",
+    "cross-env": "^7.0.3",
+    "miniprogram-ci": "^1.9.5",
+    "standard-changelog": "^2.0.27",
+    "to-fast-properties": "^3.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.4",
@@ -23,6 +33,8 @@
     "eslint-plugin-import": "^2.27.5",
     "husky": "^8.0.3",
     "miniprogram-api-typings": "^3.6.0",
+    "stylelint": "^15.2.0",
+    "stylelint-config-standard-scss": "^7.0.1",
     "typescript": "^4.9.5"
   },
   "description": ""

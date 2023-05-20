@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // index.ts
 // 获取应用实例
 // const app = getApp<IAppOption>();

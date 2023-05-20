@@ -1,3 +1,4 @@
+// copy by https://github.com/Tencent/tdesign-miniprogram/blob/develop/script/generate-changelog.js
 const { execSync } = require('child_process');
 const fs = require('fs');
 const readline = require('readline');
