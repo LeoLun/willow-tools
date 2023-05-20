@@ -61,7 +61,7 @@ jobs:
 
       # upload qrcode
       - name: Upload QRCode
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-artifact@v3
         with:
           name: qrcode
-          path: ./cache/*.jpg
+          path: cache/qrcode.jpg
