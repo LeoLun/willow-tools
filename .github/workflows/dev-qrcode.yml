@@ -64,4 +64,4 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           name: qrcode
-          path: ./config/qrcode.jpg
+          path: ./cache/qrcode.jpg

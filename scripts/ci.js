@@ -1,17 +1,20 @@
 const ci = require('miniprogram-ci');
 const path = require('path');
+const fs = require('fs');
 const config = require('../project.config.json');
 const pkg = require('../package.json');
 
 const private = process.env.MINIPROGRAM_PRIVATE;
-console.log(private.length);
+
+// 将内容写入 private.key
+fs.writeFileSync('../cache/private.key', private, { flag: 'a' });
 
 const createProject = () => {
   const project = new ci.Project({
     appid: config.appid,
     type: 'miniProgram',
     projectPath: path.resolve(__dirname, '../'),
-    privateKeyPath: path.resolve(__dirname, '../config/private.wxe2ba541424d38b85.key'),
+    privateKeyPath: path.resolve(__dirname, '../cache/private.key'),
     ignores: ['node_modules/**/*'],
   });
   return project;
@@ -25,7 +28,7 @@ const preview = async (project) => {
     robot: 20,
     setting: config.setting,
     qrcodeFormat: 'image',
-    qrcodeOutputDest: path.resolve(__dirname, '../config/qrcode.jpg'),
+    qrcodeOutputDest: path.resolve(__dirname, '../cache/qrcode.jpg'),
     onProgressUpdate: console.log,
   });
   return result;
