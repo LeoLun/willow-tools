@@ -7,7 +7,7 @@ const pkg = require('../package.json');
 const private = process.env.MINIPROGRAM_PRIVATE;
 
 // 将内容写入 private.key
-fs.writeFileSync('../cache/private.key', private, { flag: 'a' });
+fs.writeFileSync('./cache/private.key', private);
 
 const createProject = () => {
   const project = new ci.Project({
