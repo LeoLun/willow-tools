@@ -1,0 +1,28 @@
+.toolbar-container {
+  display: flex;
+  width: 100vw;
+  color: #FFFFFF;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 100rpx;
+}
+
+.toolbar-selector-content {
+  display: flex;
+  margin-bottom: 20rpx;
+  width: 100%;
+}
+
+.toolbar-content {
+  display: flex;
+
+  .item {
+    font-size: 32rpx;
+    padding: 20rpx 15rpx;
+
+    &.active {
+      color: #E37218;
+    }
+  }
+}

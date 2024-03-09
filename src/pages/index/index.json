@@ -1,3 +1,10 @@
 {
-  "usingComponents": {}
+  "backgroundTextStyle": "dark",
+  "navigationBarBackgroundColor": "#000000",
+  "navigationBarTitleText": "",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "topbar": "./topbar/topbar",
+    "toolbar": "./toolbar/toolbar"
+  }
 }

@@ -1,0 +1,15 @@
+<view class="color-selector-container">
+  <view 
+    wx:for="{{colorList}}" 
+    wx:key="name"
+    class="color-item {{ item.name === colorName ? 'action' : '' }}"
+    style="{{'background-color:'+item.color}}"
+    data-color="{{item.name}}"
+    bind:tap="onColorClick"
+  >
+    <view 
+      class="color-item-inside"
+    >
+    </view>
+  </view>
+</view>

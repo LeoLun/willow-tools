@@ -1,0 +1,8 @@
+<view class="opacity-selector-container">
+  <view class="silder">
+    <view class="silder-line">
+      <view class="silder-block"></view>
+      <view class="silder-text">50%</view>
+    </view>
+  </view>
+</view>

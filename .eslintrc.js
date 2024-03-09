@@ -23,7 +23,9 @@ module.exports = {
     requirePlugin: true,
     requireMiniProgram: true,
   },
-  rules: {},
+  rules: {
+    'max-len': ['error', { code: 150 }],
+  },
   overrides: [
     {
       files: 'scripts/**/*.{js,ts}',

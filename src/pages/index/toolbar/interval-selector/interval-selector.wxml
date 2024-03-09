@@ -1,0 +1,8 @@
+<view class="interval-selector-container">
+  <view class="silder">
+    <view class="silder-line">
+      <view class="silder-block"></view>
+      <view class="silder-text">20%</view>
+    </view>
+  </view>
+</view>

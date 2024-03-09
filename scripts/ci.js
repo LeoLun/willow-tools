@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 const ci = require('miniprogram-ci');
 const path = require('path');
 const fs = require('fs');

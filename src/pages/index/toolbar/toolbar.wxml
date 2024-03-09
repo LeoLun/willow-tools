@@ -1,0 +1,27 @@
+<view class="toolbar-container">
+
+
+  <view class="toolbar-selector-content">
+    <block 
+      wx:for="{{itemList}}"
+      wx:key="key"
+      wx:if="{{item.key === currentItem}}"
+    >
+      <color-selector wx:if="{{item.key === 0}}" model:color-name="{{currentColorName}}"></color-selector>
+      <opacity-selector wx:elif="{{item.key === 1}}" model:color-name="{{currentColorName}}"></opacity-selector>
+      <interval-selector wx:elif="{{item.key === 2}}" model:color-name="{{currentColorName}}"></interval-selector>
+      <textsize-selector wx:elif="{{item.key === 3}}" model:color-name="{{currentColorName}}"></textsize-selector>
+      <text-selector wx:elif="{{item.key === 4}}" model:color-name="{{currentColorName}}"></text-selector>
+    </block>
+  </view>
+  <view class="toolbar-content">
+    <view 
+      wx:for="{{itemList}}"
+      wx:key="key"
+      class="item {{ item.key === currentItem ? 'active' : '' }}"
+      data-key="{{item.key}}"
+      bind:tap="onItemClick">
+      {{item.name}}
+    </view>
+  </view>
+</view>

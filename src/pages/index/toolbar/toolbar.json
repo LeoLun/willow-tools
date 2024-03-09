@@ -1,0 +1,10 @@
+{
+  "component": true,
+  "usingComponents": {
+    "color-selector": "./color-selector/color-selector",
+    "opacity-selector": "./opacity-selector/opacity-selector",
+    "interval-selector": "./interval-selector/interval-selector",
+    "textsize-selector": "./textsize-selector/textsize-selector",
+    "text-selector": "./text-selector/text-selector"
+  }
+}
