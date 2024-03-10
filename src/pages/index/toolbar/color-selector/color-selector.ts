@@ -1,38 +1,34 @@
 import { IData, IProperty, IMethod } from './type';
+import { COLOR_LIST } from '../../../../utils/util';
 
 Component<IData, IProperty, IMethod>({
   properties: {
     colorName: String,
   },
   data: {
-    colorList: [
-      {
-        name: 'white',
-        color: '#FFFFFF',
-      },
-      {
-        name: 'black',
-        color: '#424242',
-      },
-      {
-        name: 'blue',
-        color: '#0052D9',
-      },
-      {
-        name: 'red',
-        color: '#D54941',
-      },
-      {
-        name: 'orange',
-        color: '#E37318',
-      },
-      {
-        name: 'green',
-        color: '#2BA471',
-      },
-    ],
+    colorList: [],
+  },
+  lifetimes: {
+    attached() {
+      this.init();
+    },
   },
   methods: {
+    init() {
+      const colorKeys = Object.keys(COLOR_LIST);
+      this.data.colorList = [];
+      colorKeys.forEach((key) => {
+        this.data.colorList.push({
+          color: COLOR_LIST[key].showColor || COLOR_LIST[key].color,
+          name: key,
+        });
+      });
+      this.setData(
+        {
+          colorList: this.data.colorList,
+        },
+      );
+    },
     onColorClick(res: WechatMiniprogram.BaseEvent<WechatMiniprogram.IAnyObject, { color: string }>) {
       const { color } = res.currentTarget.dataset;
       if (color !== this.data.colorName) {

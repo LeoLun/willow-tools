@@ -30,7 +30,7 @@ Component<IData, IProperty, IMethod>({
         key: ItemKey.TextKey,
       },
     ],
-    currentItem: ItemKey.ColorKey,
+    currentItem: ItemKey.OpacityKey,
     currentColorName: '',
   },
   lifetimes: {

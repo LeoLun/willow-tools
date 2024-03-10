@@ -2,9 +2,8 @@
   <view class="content-top">
     <topbar bind:changepath="onChangePath"></topbar>
   </view>
-  <view class="content">
-    <canvas id="myCanvas"  type="2d"/>
-    <!-- <image src="../../assets/base.jpg"></image> -->
+  <view id="content" class="content" >
+    <canvas id="myCanvas"  type="2d" style="width: {{canvasWidth}};height: {{canvasHeigth}};"/>
   </view>
   <view class="content-bottom">
     <toolbar model:color-name="{{colorName}}" bind:changecolor="onChangeColor"></toolbar>

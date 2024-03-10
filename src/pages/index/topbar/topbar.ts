@@ -20,16 +20,21 @@ Component({
    */
   methods: {
     async chooseImage() {
-      const res = await wx.chooseMedia({
-        count: 1, // 默认9张
-        mediaType: ['image'], // 可以选择的媒体类型，这里只选择图片
-        sourceType: ['album', 'camera'], // 可以选择图片来源，相册或相机
-        sizeType: ['compressed'], // 可以选择图片大小，压缩图或者原图
-      });
+      try {
+        const res = await wx.chooseMedia({
+          count: 1, // 默认9张
+          mediaType: ['image'], // 可以选择的媒体类型，这里只选择图片
+          sourceType: ['album', 'camera'], // 可以选择图片来源，相册或相机
+          sizeType: ['compressed'], // 可以选择图片大小，压缩图或者原图
+        });
 
-      this.triggerEvent('changepath', {
-        path: res.tempFiles[0].tempFilePath,
-      });
+        this.triggerEvent('changepath', {
+          path: res.tempFiles[0].tempFilePath,
+        });
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log('err', err);
+      }
     },
   },
 });
