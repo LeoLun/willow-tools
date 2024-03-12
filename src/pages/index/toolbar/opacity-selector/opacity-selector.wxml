@@ -1,8 +1,25 @@
 <view class="opacity-selector-container">
-  <view class="silder">
-    <view class="silder-line">
-      <view class="silder-block"></view>
-      <view class="silder-text">50%</view>
+  <view
+    id="slider"
+    class="slider"
+  >
+    <view
+      class="slider-line"
+      style="width: {{sliderValue}};"
+    >
+      <view 
+        class="slider-block"
+      >
+        <view
+          class="slider-block-touch"
+          bindtouchstart="onTouchStart"
+          bindtouchmove="onTouchMove"
+          bindtouchend="onTouchEnd"
+        >
+        </view>
+      </view>
+      <view class="slider-text">{{sliderValue}}</view>
     </view>
   </view>
 </view>
+

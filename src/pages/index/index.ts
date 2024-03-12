@@ -154,4 +154,42 @@ Page({
       }
     }
   },
+
+  async downloadImage() {
+    // 获取图片大小
+    const res = await wx.getImageInfo({ src: currentImagePath });
+    const { width, height } = res;
+
+    wx.createSelectorQuery()
+      .select('#myCanvas') // 在 WXML 中填入的 id
+      .fields({ node: true, size: true })
+      .exec((res1: any) => {
+        const canvas = res1[0].node;
+        // 获取图片大小，渲染
+        wx.canvasToTempFilePath({
+          canvas,
+          destHeight: height,
+          destWidth: width,
+          success: (res2: any) => {
+            console.log(res2.tempFilePath); // 图片的临时路径
+
+            wx.saveImageToPhotosAlbum({
+              filePath: res2.tempFilePath,
+              success: () => {
+                wx.showToast({
+                  title: '图片已保存到相册',
+                  icon: 'success',
+                });
+              },
+              fail: (err) => {
+                console.error(err);
+              },
+            });
+          },
+          fail: (err) => {
+            console.error(err);
+          },
+        });
+      });
+  },
 });
