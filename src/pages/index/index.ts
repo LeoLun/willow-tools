@@ -33,6 +33,7 @@ Page({
     const { width, height } = await this.getContentSizeById('content');
     CONTENT_WIDTH = width;
     CONTENT_HEIGHT = height;
+    console.log('CONTENT_HEIGHT', CONTENT_HEIGHT);
     this.renderCanvas(currentImagePath);
     this.redraw = throttle(this.renderCanvas, 100);
   },
@@ -102,7 +103,7 @@ Page({
     }
     // 若高度大于展示区高度，则计算高度缩放比
     if (height > CONTENT_HEIGHT) {
-      heightScale = CONTENT_HEIGHT / width;
+      heightScale = CONTENT_HEIGHT / height;
     }
     // 采用最高缩放比
     const scale = Math.min(widthScale, heightScale);
