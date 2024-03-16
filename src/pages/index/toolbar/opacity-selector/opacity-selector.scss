@@ -1,51 +1,11 @@
 .opacity-selector-container {
   display: flex;
-  height: 100rpx;
+  height: 150rpx;
   width: 100vw;
   justify-content: center;
   align-items: center;
 }
 
-.slider {
-  height: 46rpx;
+.opacity-slider {
   width: 80%;
-  background: #424242;
-  border-radius: 20rpx;
-  transition: all 100ms linear;
-  
-  .slider-line {
-    position: relative;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    height: 46rpx;
-    min-width: 46rpx;
-    background: #E37318;
-    border-radius: 46rpx;
-  }
-
-  .slider-block {
-    position: relative;
-    height: 34rpx;
-    width: 34rpx;
-    border-radius: 100%;
-    margin-right: 6rpx;
-    background-color: #FFFFFF;
-  }
-
-  .slider-block-touch {
-    position: absolute;
-    width: 50rpx;
-    height: 50rpx;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .slider-text {
-    position: absolute;
-    top: -45rpx;
-    left: 50%;
-    transform: translate(-50%);
-  }
 }

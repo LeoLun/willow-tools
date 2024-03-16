@@ -1,5 +1,5 @@
 <view class="text-selector-container">
   <view class="input-content">
-    <input class="text-input" value="水印" />
+    <input class="text-input" model:value="{{watermark}}" />
   </view>
 </view>

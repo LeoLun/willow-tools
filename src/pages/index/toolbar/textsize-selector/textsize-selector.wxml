@@ -1,10 +1,9 @@
 <view class="textsize-selector-container">
-  <view class="silder">
-    <view class="silder-text">正常大小</view>
-    <view 
-      wx:for="{{sizeList}}"
-      wx:key="item"
-      class="silder-block {{index === 2 ? 'action' : ''}}">
-    </view>
-  </view>
+  <w-slider 
+    class="textsize-slider" 
+    model:slider-value="{{textSize}}"
+    max="{{3}}"
+    min="{{0.5}}"
+    step="{{0.025}}">
+  </w-slider>
 </view>

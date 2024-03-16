@@ -1,8 +1,8 @@
 <view class="topbar-container">
-  <view bind:tap="chooseImage">
+  <view bind:tap="onChooseImage">
     更换图片
   </view>
-  <view>
+  <view bind:tap="onDownload">
     下载
   </view>
 </view>

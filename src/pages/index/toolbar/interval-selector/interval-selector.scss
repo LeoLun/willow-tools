@@ -1,43 +1,25 @@
 .interval-selector-container {
   display: flex;
-  height: 100rpx;
+  flex-direction: column;
+  height: 150rpx;
   width: 100vw;
   justify-content: center;
   align-items: center;
 }
 
-.silder {
-  height: 45rpx;
+.interval-selector-content {
+  display: flex;
   width: 80%;
-  background: #424242;
-  border-radius: 20rpx;
-  transition: all 100ms linear;
-  
-  .silder-line {
-    position: relative;
-    display: block;
-    height: 45rpx;
-    width: 20%;
-    background: #E37318;
-    border-radius: 40rpx;
-    transition: all 100ms linear;
+
+  &:not(:last-child) {
+    margin-bottom: 30rpx;
   }
 
-  .silder-block {
-    position: absolute;
-    height: 39rpx;
-    width: 39rpx;
-    border-radius: 100%;;
-    background-color: #FFFFFF;
-    z-index: 5;
-    top: 3rpx;
-    right: 6rpx;
-    transition: all 100ms linear;
+  .interval-title {
+    margin-right: 20rpx;
   }
 
-  .silder-text {
-    position: absolute;
-    right: -20rpx;
-    bottom: 120%;
+  .interval-slider {
+    flex: 1;
   }
 }

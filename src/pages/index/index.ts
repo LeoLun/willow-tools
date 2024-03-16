@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable no-multi-assign */
 /* eslint-disable no-plusplus */
-import { COLOR_LIST } from '../../utils/util';
+import { COLOR_LIST, throttle } from '../../utils/util';
 
 const baseImagePath = '../../assets/base.jpg';
 
@@ -9,13 +9,19 @@ let currentImagePath = '';
 let CONTENT_WIDTH = 0;
 let CONTENT_HEIGHT = 0;
 
+const QUALITY = 80;
+
 Page({
   data: {
     canvasWidth: '100%',
     canvasHeigth: '350px',
+    canvasScale: 1,
     colorName: COLOR_LIST.red.name,
-    opacity: 0.5,
-    watermark: '仅租房使用',
+    opacityValue: 50,
+    watermark: '仅用于XX使用',
+    textSize: 1,
+    columnInterval: 5,
+    rowInterval: 5,
   },
 
   onLoad() {
@@ -25,10 +31,14 @@ Page({
   async init() {
     currentImagePath = baseImagePath;
     const { width, height } = await this.getContentSizeById('content');
-    console.log('');
     CONTENT_WIDTH = width;
     CONTENT_HEIGHT = height;
-    this.addMark(currentImagePath);
+    this.renderCanvas(currentImagePath);
+    this.redraw = throttle(this.renderCanvas, 100);
+  },
+
+  redraw(path: string) {
+    console.log('path', path);
   },
 
   async getContentSizeById(id: string): Promise<{ width: number, height: number }> {
@@ -46,17 +56,40 @@ Page({
     });
   },
 
-  onChangePath(res: WechatMiniprogram.CustomEvent<{ path: string }>) {
+  async onChangePath(res: WechatMiniprogram.CustomEvent<{ path: string }>) {
+    wx.showLoading({
+      title: '处理中',
+    });
     currentImagePath = res.detail.path;
-    this.addMark(currentImagePath);
+    await this.renderCanvas(currentImagePath);
+    wx.hideLoading();
   },
 
-  onChangeColor(res: WechatMiniprogram.CustomEvent<{ colorName: string }>) {
-    console.log(res.detail.colorName);
-    this.addMark(currentImagePath);
+  onChangeColor() {
+    this.renderCanvas(currentImagePath);
   },
 
-  async computeCanvasSize(path: string): Promise<{ width: number; height: number; }> {
+  onChangeOpacity() {
+    this.redraw(currentImagePath);
+  },
+
+  onChangeWatermark() {
+    this.redraw(currentImagePath);
+  },
+
+  onChangeTextSize() {
+    this.redraw(currentImagePath);
+  },
+
+  onChangeColumnInterval() {
+    this.redraw(currentImagePath);
+  },
+
+  onChangeRowInterval() {
+    this.redraw(currentImagePath);
+  },
+
+  async computeCanvasSize(path: string): Promise<{ width: number; height: number; scale: number }> {
     // 获取图片大小
     const res = await wx.getImageInfo({ src: path });
     const { width, height } = res;
@@ -73,68 +106,68 @@ Page({
     }
     // 采用最高缩放比
     const scale = Math.min(widthScale, heightScale);
-    console.log('scale', width * scale, height * scale);
-
     // 设置 canvas 大小
-    return { width: width * scale, height: height * scale };
+    // return { width: width * scale, height: height * scale };
+    return { width, height, scale };
   },
 
-  async setCanvasSize(width: number, height: number) {
+  async setCanvasSize(width: number, height: number, scale: number) {
     return new Promise<void>((resolve) => {
       this.setData({
-        canvasWidth: `${width}px`,
-        canvasHeigth: `${height}px`,
+        canvasWidth: `${width * scale}px`,
+        canvasHeigth: `${height * scale}px`,
+        canvasScale: scale,
       }, () => {
         resolve();
       });
     });
   },
 
-  async addMark(path: string) {
-    const { width, height } = await this.computeCanvasSize(path);
-    await this.setCanvasSize(width, height);
-    const query = wx.createSelectorQuery();
-    query.select('#myCanvas')
-      .fields({ node: true, size: true })
-      .exec((res: any) => {
-        // Canvas 对象
-        const canvas = res[0].node;
+  async renderCanvas(path: string): Promise<void> {
+    const { width, height, scale } = await this.computeCanvasSize(path);
+    await this.setCanvasSize(width, height, scale);
 
-        console.log('canvas', canvas);
-        // 渲染上下文
-        const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
-        // 初始化画布大小
-        const dpr = wx.getWindowInfo().pixelRatio;
-        canvas.width = width * dpr;
-        canvas.height = height * dpr;
-        ctx.scale(dpr, dpr);
+    return new Promise((resolve) => {
+      const query = wx.createSelectorQuery();
+      query.select('#myCanvas')
+        .fields({ node: true, size: true })
+        .exec((res: any) => {
+          // Canvas 对象
+          const canvas = res[0].node;
+          // 渲染上下文
+          const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+          // 初始化画布大小
+          canvas.width = width;
+          canvas.height = height;
 
-        // 图片对象
-        const image = canvas.createImage();
-        // 图片加载完成回调
-        image.onload = () => {
-          // 将图片绘制到 canvas 上
-          ctx.drawImage(image, 0, 0, width, height);
-          console.log('ctx', ctx);
-          this.add(ctx, canvas);
-        };
+          // 图片对象
+          const image = canvas.createImage();
+          // 图片加载完成回调
+          image.onload = () => {
+            // 将图片绘制到 canvas 上
+            ctx.drawImage(image, 0, 0, width, height);
+            this.addWatermark(ctx, canvas);
+            resolve();
+          };
 
-        image.src = path;
-      });
+          image.src = path;
+        });
+    });
   },
 
-  add(ctx: any, canvas: any) {
-    const textSize = 20;
+  addWatermark(ctx: any, canvas: any) {
+    const textSize = this.data.textSize * Math.max(15, (Math.min(canvas.width, canvas.height)) / 25);
     ctx.rotate((45 * Math.PI) / 180);
     let color = COLOR_LIST.red.rgb;
     const colorItem = COLOR_LIST[this.data.colorName];
     if (colorItem) {
       color = colorItem.rgb;
     }
-    ctx.fillStyle = `rgba(${color},${this.data.opacity})`;
+    ctx.fillStyle = `rgba(${color},${this.data.opacityValue / 100})`;
     ctx.font = `bold ${textSize}px -apple-system,"Helvetica Neue",Helvetica,Arial,"PingFang SC","Hiragino Sans GB","WenQuanYi Micro Hei",sans-serif`;
     const value = this.data.watermark;
-    const space = 1;
+    // 上下
+    const space = this.data.columnInterval;
     // 添加水印
     let i;
     let j;
@@ -145,7 +178,8 @@ Page({
     let ref2;
     const { width } = ctx.measureText(value);
     const step = Math.sqrt((canvas.width ** 2) + (canvas.height ** 2));
-    const margin = (ctx.measureText('啊')).width;
+    // 左右
+    const margin = (ctx.measureText('啊')).width * this.data.rowInterval;
     const x = Math.ceil(step / (width + margin));
     const y = Math.ceil((step / (space * textSize)) / 2);
     for (i = k = 0, ref = x; (ref >= 0 ? k <= ref : k >= ref); i = ref >= 0 ? ++k : --k) {
@@ -155,41 +189,49 @@ Page({
     }
   },
 
-  async downloadImage() {
+  async onDownloadImage() {
     // 获取图片大小
     const res = await wx.getImageInfo({ src: currentImagePath });
     const { width, height } = res;
+    wx.showLoading({
+      title: '处理中',
+    });
 
     wx.createSelectorQuery()
       .select('#myCanvas') // 在 WXML 中填入的 id
       .fields({ node: true, size: true })
-      .exec((res1: any) => {
-        const canvas = res1[0].node;
-        // 获取图片大小，渲染
-        wx.canvasToTempFilePath({
-          canvas,
-          destHeight: height,
-          destWidth: width,
-          success: (res2: any) => {
-            console.log(res2.tempFilePath); // 图片的临时路径
+      .exec(async (matches: any) => {
+        try {
+          const canvas = matches[0].node;
 
-            wx.saveImageToPhotosAlbum({
-              filePath: res2.tempFilePath,
-              success: () => {
-                wx.showToast({
-                  title: '图片已保存到相册',
-                  icon: 'success',
-                });
-              },
-              fail: (err) => {
-                console.error(err);
-              },
-            });
-          },
-          fail: (err) => {
-            console.error(err);
-          },
-        });
+          const { tempFilePath } = await wx.canvasToTempFilePath({
+            canvas,
+            destHeight: height,
+            destWidth: width,
+            fileType: 'jpg',
+          });
+
+          const { tempFilePath: compressImagePath } = await wx.compressImage({
+            src: tempFilePath, // 图片路径
+            quality: QUALITY,
+          });
+
+          await wx.saveImageToPhotosAlbum({
+            filePath: compressImagePath,
+          });
+
+          wx.hideLoading();
+          wx.showToast({
+            title: '图片已保存到相册',
+            icon: 'success',
+          });
+        } catch {
+          wx.hideLoading();
+          wx.showToast({
+            title: '保存失败',
+            icon: 'error',
+          });
+        }
       });
   },
 });

@@ -1,0 +1,44 @@
+.w-slider {
+  height: 46rpx;
+  width: 100%;
+  background: #424242;
+  border-radius: 20rpx;
+  transition: all 100ms linear;
+  
+  .w-slider-line {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 46rpx;
+    min-width: 46rpx;
+    background: #E37318;
+    border-radius: 46rpx;
+  }
+
+  .w-slider-block {
+    position: relative;
+    height: 34rpx;
+    width: 34rpx;
+    border-radius: 100%;
+    margin-right: 6rpx;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .w-slider-block-touch {
+    position: absolute;
+    width: 50rpx;
+    height: 50rpx;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .w-slider-text {
+    position: absolute;
+    top: -45rpx;
+  }
+}

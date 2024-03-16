@@ -1,44 +1,11 @@
 .textsize-selector-container {
-  position: relative;
   display: flex;
-  flex-direction: column;
-  height: 100rpx;
+  height: 150rpx;
   width: 100vw;
   justify-content: center;
   align-items: center;
 }
 
-.silder {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 45rpx;
+.textsize-slider {
   width: 80%;
-  background: #424242;
-  border-radius: 40rpx;
-  box-sizing: border-box;
-  padding: 0 9rpx;
-
-  .silder-block {
-    height: 30rpx;
-    width: 30rpx;
-    border-radius: 100%;
-    background-color: #FFFFFF;
-    border: 6rpx solid #424242;
-    box-sizing: border-box;
-
-    &.action {
-      border-color: #E37318;
-    }
-  }
-}
-
-.silder-text {
-  position: absolute;
-  color: #FFFFFF;
-  margin-bottom: 15rpx;
-  top: -10rpx;
-  transform: translateX(-50%) translateY(-100%);
-  left: 50%;
 }

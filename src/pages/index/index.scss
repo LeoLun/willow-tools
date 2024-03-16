@@ -28,7 +28,7 @@ page {
   flex-direction: row;
   justify-content: center;
   align-items: flex-end;
-  height: 500rpx;
   padding-bottom: constant(safe-area-inset-bottom);
   padding-bottom: env(safe-area-inset-bottom);
+  margin-top: 20rpx;
 }

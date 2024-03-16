@@ -12,22 +12,23 @@
       </color-selector>
       <opacity-selector
         wx:elif="{{item.key === 1}}"
-        model:color-name="{{currentColorName}}"
+        model:opacity-value="{{currentOpacityValue}}"
       >
       </opacity-selector>
       <interval-selector
         wx:elif="{{item.key === 2}}"
-        model:color-name="{{currentColorName}}"
+        model:column-interval="{{currentColumnInterval}}"
+        model:row-interval="{{currentRowInterval}}"
       >
       </interval-selector>
       <textsize-selector
         wx:elif="{{item.key === 3}}"
-        model:color-name="{{currentColorName}}"
+        model:text-size="{{currentTextSize}}"
       >
       </textsize-selector>
       <text-selector
         wx:elif="{{item.key === 4}}"
-        model:color-name="{{currentColorName}}"
+        model:watermark="{{currentWatermark}}"
       >
       </text-selector>
     </block>

@@ -1,25 +1,3 @@
 <view class="opacity-selector-container">
-  <view
-    id="slider"
-    class="slider"
-  >
-    <view
-      class="slider-line"
-      style="width: {{sliderValue}};"
-    >
-      <view 
-        class="slider-block"
-      >
-        <view
-          class="slider-block-touch"
-          bindtouchstart="onTouchStart"
-          bindtouchmove="onTouchMove"
-          bindtouchend="onTouchEnd"
-        >
-        </view>
-      </view>
-      <view class="slider-text">{{sliderValue}}</view>
-    </view>
-  </view>
+  <w-slider class="opacity-slider" isShowValue="{{true}}" model:slider-value="{{opacityValue}}"></w-slider>
 </view>
-

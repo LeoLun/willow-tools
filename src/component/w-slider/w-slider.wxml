@@ -1,0 +1,9 @@
+<view id="slider" class="w-slider">
+  <view class="w-slider-line" style="width: calc({{(sliderValue - min)/step}} * ((100% - 46rpx) / {{(max - min) / step}}) + 46rpx);">
+    <view class="w-slider-block">
+      <view class="w-slider-block-touch" bindtouchstart="onTouchStart" bindtouchmove="onTouchMove" bindtouchend="onTouchEnd">
+      </view>
+      <view wx:if="{{isShowValue}}" class="w-slider-text">{{sliderValue}}</view>
+    </view>
+  </view>
+</view>

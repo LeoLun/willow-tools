@@ -1,4 +1,6 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "w-slider": "../../../../component/w-slider/w-slider"
+  }
 }
