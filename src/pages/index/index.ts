@@ -33,7 +33,6 @@ Page({
     const { width, height } = await this.getContentSizeById('content');
     CONTENT_WIDTH = width;
     CONTENT_HEIGHT = height;
-    console.log('CONTENT_HEIGHT', CONTENT_HEIGHT);
     this.renderCanvas(currentImagePath);
     this.redraw = throttle(this.renderCanvas, 100);
   },
@@ -61,6 +60,10 @@ Page({
     wx.showLoading({
       title: '处理中',
     });
+    // 由于初始化后高度可能变化，所以切换图片需要重新设置
+    const { width, height } = await this.getContentSizeById('content');
+    CONTENT_WIDTH = width;
+    CONTENT_HEIGHT = height;
     currentImagePath = res.detail.path;
     await this.renderCanvas(currentImagePath);
     wx.hideLoading();
