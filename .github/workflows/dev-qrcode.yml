@@ -53,16 +53,16 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      # build qrcode
-      - name: Build QRCode
-        env:
-          MINIPROGRAM_PRIVATE: ${{ secrets.MINIPROGRAM_PRIVATE }}
-        run: npm run preview
+      # # build qrcode
+      # - name: Build QRCode
+      #   env:
+      #     MINIPROGRAM_PRIVATE: ${{ secrets.MINIPROGRAM_PRIVATE }}
+      #   run: npm run preview
 
-      # upload qrcode
-      - name: Upload QRCode
-        uses: actions/upload-artifact@v3
-        with:
-          name: qrcode
-          path: cache/qrcode.jpg
-          retention-days: 1
+      # # upload qrcode
+      # - name: Upload QRCode
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: qrcode
+      #     path: cache/qrcode.jpg
+      #     retention-days: 1
