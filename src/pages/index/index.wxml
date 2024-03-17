@@ -1,12 +1,22 @@
 <view class="container">
   <view class="content-top">
-    <topbar bind:changepath="onChangePath" bind:download="onDownloadImage"></topbar>
+    <topbar
+      class="topbar"
+      bind:changepath="onChangePath"
+      bind:download="onDownloadImage"
+    >
+    </topbar>
   </view>
   <view id="content" class="content" >
-    <canvas id="myCanvas"  type="2d" style="width: {{canvasWidth}};height: {{canvasHeigth}};"/>
+    <canvas 
+      id="myCanvas"
+      type="2d"
+      style="width: {{canvasWidth}};height: {{canvasHeigth}};"
+    />
   </view>
   <view class="content-bottom">
     <toolbar
+      class="toolbar"
       model:color-name="{{colorName}}"
       model:opacity-value="{{opacityValue}}"
       model:watermark="{{watermark}}"

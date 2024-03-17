@@ -1,6 +1,6 @@
 .toolbar-container {
   display: flex;
-  width: 100vw;
+  width: 100%;
   color: #FFFFFF;
   flex-direction: column;
   justify-content: center;
@@ -14,8 +14,19 @@
   width: 100%;
 }
 
+.selector-item {
+  display: none;
+  width: 100%;
+
+  &.action {
+    display: block;
+  }
+}
+
 .toolbar-content {
   display: flex;
+  width: 100%;
+  justify-content: center;
 
   .item {
     font-size: 32rpx;

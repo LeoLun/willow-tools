@@ -32,7 +32,7 @@ Component({
           path: res.tempFiles[0].tempFilePath,
         });
       } catch {
-        //
+        // 选择图片失败
       }
     },
     onDownload() {

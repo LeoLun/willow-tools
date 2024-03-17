@@ -6,28 +6,28 @@
       wx:if="{{item.key === currentItem}}"
     >
       <color-selector
-        wx:if="{{item.key === 0}}"
+        class="selector-item {{item.key === 0 ? 'action' : ''}}"
         model:color-name="{{currentColorName}}"
       >
       </color-selector>
       <opacity-selector
-        wx:elif="{{item.key === 1}}"
+        class="selector-item {{item.key === 1 ? 'action' : ''}}"
         model:opacity-value="{{currentOpacityValue}}"
       >
       </opacity-selector>
       <interval-selector
-        wx:elif="{{item.key === 2}}"
+        class="selector-item {{item.key === 2 ? 'action' : ''}}"
         model:column-interval="{{currentColumnInterval}}"
         model:row-interval="{{currentRowInterval}}"
       >
       </interval-selector>
       <textsize-selector
-        wx:elif="{{item.key === 3}}"
+        class="selector-item {{item.key === 3 ? 'action' : ''}}"
         model:text-size="{{currentTextSize}}"
       >
       </textsize-selector>
       <text-selector
-        wx:elif="{{item.key === 4}}"
+        class="selector-item {{item.key === 4 ? 'action' : ''}}"
         model:watermark="{{currentWatermark}}"
       >
       </text-selector>
